@@ -8,11 +8,9 @@ import java.util.Objects;
 public class TextFileSearcher {
     private final File _rootFile;
     private final List<File> _txtFilesList;
-    private File result;
     TextFileSearcher(String rootFile) {
         _rootFile = new File(rootFile);
         _txtFilesList = new ArrayList<>();
-        result = new File(rootFile + "\\resultingFile.txt");
     }
     public boolean searchTextFiles() {
         searchRecursive(_rootFile);
@@ -33,13 +31,11 @@ public class TextFileSearcher {
             }
         }
     }
-    public void sortTextFiles() {
-        TextFileSorter sorter = new TextFileSorter(_txtFilesList, _rootFile);
-        File[] sortedFiles = sorter.sortFiles();
-
-        for (File file : sortedFiles) {
-            System.out.println("\n" + file.getName() + "\n");
-        }
+    public List<File> getTxtFiles() {
+        return _txtFilesList;
+    }
+    public File getRootFile() {
+        return _rootFile;
     }
 }
 
