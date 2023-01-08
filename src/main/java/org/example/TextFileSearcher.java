@@ -8,10 +8,20 @@ import java.util.Objects;
 public class TextFileSearcher {
     private final File _rootFile;
     private final List<File> _txtFilesList;
+
+    /**
+     * constructor for TextFileSearcher
+     * @param rootFile path to root file
+     */
     TextFileSearcher(String rootFile) {
         _rootFile = new File(rootFile);
         _txtFilesList = new ArrayList<>();
     }
+
+    /**
+     * Searches for text files
+     * @return true if files were found& Else - false
+     */
     public boolean searchTextFiles() {
         searchRecursive(_rootFile);
         if (_txtFilesList.size() == 0) {
@@ -20,6 +30,11 @@ public class TextFileSearcher {
         }
         return true;
     }
+
+    /**
+     * Recursive searching for text files
+     * @param currentFile needed for recursion& Current file
+     */
     private void searchRecursive(File currentFile) {
         if (currentFile.isDirectory()) {
             for (File file : Objects.requireNonNull(currentFile.listFiles())) {
@@ -31,9 +46,19 @@ public class TextFileSearcher {
             }
         }
     }
+
+    /**
+     * returns list of files that were found
+     * @return list of files that were found
+     */
     public List<File> getTxtFiles() {
         return _txtFilesList;
     }
+
+    /**
+     * returns root file
+     * @return root file
+     */
     public File getRootFile() {
         return _rootFile;
     }

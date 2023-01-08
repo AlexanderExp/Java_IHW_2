@@ -7,6 +7,10 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class Main {
+    /**
+     * main method of the program
+     * @param args
+     */
     public static void main(String[] args) {
         boolean userWantsToTryAgain = true;
         boolean everythingWentSmoothly;
@@ -31,6 +35,10 @@ public class Main {
                 """);
     }
 
+    /**
+     * Starts the work of all main features. Needed to simplify the process of reloading the work of program
+     * @return true if everything is fine. Else - false
+     */
     public static boolean startProcess() {
         System.out.println("Введите полный путь корневой папки: ");
         String rootFile = null;
@@ -58,6 +66,10 @@ public class Main {
         return true;
     }
 
+    /**
+     * Reads input and gets name of root file& Checks if the name is correct
+     * @return name of rootFile from input
+     */
     public static String getRootFileName() {
         String rootFile = null;
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -79,6 +91,12 @@ public class Main {
         return rootFile;
     }
 
+    /**
+     * Concatenates all text from sorted array of files
+     * @param sortedFiles A sorted array of files that we need to concatenate
+     * @param resultingFile The file for final output
+     * @throws IOException In case of bad file names or any problems with files
+     */
     public static void concatenateSortedFilesInOneResultingFile(File[] sortedFiles, File resultingFile) throws IOException {
         BufferedReader fileReader;
         BufferedWriter fileWriter;

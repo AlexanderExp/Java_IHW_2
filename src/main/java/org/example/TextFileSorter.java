@@ -7,6 +7,12 @@ public class TextFileSorter {
     private final List<File> _txtFilesList;
     private Dictionary<File, List<File>> _fileDependencies;
     private final File _rootFile;
+
+    /**
+     * Constructor for TextFileSorter
+     * @param txtFilesList list of text files
+     * @param rootFile root file
+     */
     TextFileSorter(List<File> txtFilesList, File rootFile) {
         _txtFilesList = txtFilesList;
         _rootFile = rootFile;
@@ -17,6 +23,11 @@ public class TextFileSorter {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * fills the dictionary with files and dependencies
+     * @throws IOException in case of bad files
+     */
     private void fillFileDependencies() throws IOException {
             _fileDependencies = new Hashtable<>();
             // Проходим по всем файлам и заполняем словарь, где ключ - файл,
@@ -45,6 +56,11 @@ public class TextFileSorter {
                 }
             }
     }
+
+    /**
+     * checks if any dependencies are cyclic
+     * @return paths to bad files
+     */
     private String checkDependencies() {
         StringBuilder badFiles = new StringBuilder();
         for (File fileKey : _txtFilesList) {
@@ -63,6 +79,11 @@ public class TextFileSorter {
         }
         return "";
     }
+
+    /**
+     * sorts files as mentioned in the task
+     * @return sorted array of files
+     */
     public File[] sortFiles() {
          String badFiles = checkDependencies();
          if (badFiles.equals("")) {
