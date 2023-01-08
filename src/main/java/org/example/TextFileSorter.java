@@ -6,8 +6,10 @@ import java.util.*;
 public class TextFileSorter {
     private final List<File> _txtFilesList;
     private Dictionary<File, List<File>> _fileDependencies;
-    TextFileSorter(List<File> txtFilesList) {
+    private final File _rootFile;
+    TextFileSorter(List<File> txtFilesList, File rootFile) {
         _txtFilesList = txtFilesList;
+        _rootFile = rootFile;
         try {
             fillFileDependencies();
         } catch (IOException e) {
@@ -33,10 +35,10 @@ public class TextFileSorter {
                     }
                     if (!reachedEndOfFile) {
                         if (currentLineInFile.contains("require ")) {
-                            int beginningOfFIlePath = currentLineInFile.indexOf("‘");
+                            int beginningOfFIlePath = currentLineInFile.indexOf("‘") + 1;
                             int endOfFilePath = currentLineInFile.lastIndexOf("’");
-                            requirementInCurrentLine = currentLineInFile.substring(beginningOfFIlePath, endOfFilePath).trim();
-                            _fileDependencies.get(file).add(new File(requirementInCurrentLine));
+                            requirementInCurrentLine = currentLineInFile.substring(beginningOfFIlePath, endOfFilePath).trim() + ".txt";
+                            _fileDependencies.get(file).add(new File(_rootFile + "/" + requirementInCurrentLine));
                         }
                     }
                 }

@@ -34,7 +34,7 @@ public class TextFileSearcher {
         }
     }
     public void sortTextFiles() {
-        TextFileSorter sorter = new TextFileSorter(_txtFilesList);
+        TextFileSorter sorter = new TextFileSorter(_txtFilesList, _rootFile);
         File[] sortedFiles = sorter.sortFiles();
 
         for (File file : sortedFiles) {
